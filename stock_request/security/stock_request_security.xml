@@ -26,9 +26,6 @@
         <field name="name">Stock Request Order</field>
         <field name="category_id" ref="base.module_category_hidden" />
     </record>
-    <record id="stock.group_stock_user" model="res.groups">
-        <field name="implied_ids" eval="[(4, ref('group_stock_request_user'))]" />
-    </record>
     <data noupdate="1">
         <record model="ir.rule" id="stock_picking_rule">
             <field name="name">stock_request multi-company</field>
@@ -40,7 +37,7 @@
             <field name="global" eval="True" />
             <field
                 name="domain_force"
-            >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+            >['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
         </record>
         <record id="stock_request_followers_rule" model="ir.rule">
             <field name="name">Follow Stock Request</field>
@@ -78,7 +75,7 @@
             <field name="global" eval="True" />
             <field
                 name="domain_force"
-            >['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+            >['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
         </record>
         <record id="stock_request_order_followers_rule" model="ir.rule">
             <field name="name">Follow Stock Request Order</field>
