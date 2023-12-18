@@ -26,9 +26,7 @@ class StockPicking(models.Model):
         """
         :return dict: dictionary value for created view
         """
-        action = self.env["ir.actions.act_window"]._for_xml_id(
-            "stock_request.action_stock_request_form"
-        )
+        action = self.env.ref("stock_request.action_stock_request_form").read()[0]
 
         requests = self.mapped("stock_request_ids")
         if len(requests) > 1:
